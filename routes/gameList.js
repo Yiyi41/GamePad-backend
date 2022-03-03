@@ -6,15 +6,23 @@ require("dotenv").config();
 router.get("/", async (req, res) => {
   const name = req.query.search;
   const page = req.query.page;
-  const genres = req.query.genres;
+  const genres = req.query.genres.toLowerCase();
   const platforms = req.query.platforms;
-  let queryforAxios = `https://api.rawg.io/api/games?key=${process.env.API_KEY}&page=${page}&search=${name}`;
+  let queryforAxios = `https://api.rawg.io/api/games?key=${process.env.API_KEY}&page=${page}`;
 
-  if (genres !== "") queryforAxios += `&genres=${genres}`;
-  if (platforms !== "") queryforAxios += `&platform=${platforms}`;
+  // CONDITION FOR DIFFERENT FILTERS
 
-  // console.log(queryforAxios);
+  if (name !== "") queryforAxios += `&search=${name}`;
+  if (genres !== "" && genres !== "all") {
+    queryforAxios += `&genres=${genres}`;
+  }
+  if (platforms !== "" && platforms !== "0") {
+    queryforAxios += `&platforms=${platforms}`;
+  }
+
+  console.log(queryforAxios);
   try {
+    // console.log("queryforAxios: " + queryforAxios);
     const response = await axios.get(queryforAxios);
     //   `https://api.rawg.io/api/games?key=${process.env.API_KEY}&page=${page}&search=${name}`
     // );
