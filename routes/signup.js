@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const cloudinary = require("cloudinary").v2;
-require("dotenv").config();
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -20,13 +19,13 @@ const User = require("../models/User");
 // REQUEST TO API
 router.post("/signup", async (req, res) => {
   console.log(req.fields);
-  console.log(req.files.path);
+  console.log(req.files);
 
   try {
-    // let pictureToUpload = req.files.picture.path;
-    // const picture = await cloudinary.uploader.upload(pictureToUpload);
-    // console.log(req.files);
-    // console.log(req.fields.username);
+    let pictureToUpload = req.files.picture.path;
+    const picture = await cloudinary.uploader.upload(pictureToUpload);
+    console.log(req.files);
+    console.log(req.fields.username);
 
     // VARIABLES FOR CREATION OF USER TOKEN
     const newSalt = uid2(16);
@@ -39,10 +38,10 @@ router.post("/signup", async (req, res) => {
     // CONDITON FOR CHECKING IF USER ALREADY EXISTS
     if (userToCheck) {
       console.log("email already exist");
-      res.status(400).json("cet email existe déjà");
+      // res.status(400).json("cet email existe déjà");
     } else if (!req.fields.username) {
       console.log("username est obligatoire");
-      res.status(400).json("username est obligatoire");
+      // res.status(400).json("username est obligatoire");
 
       //   IF NOT EXISTS, CREATION OF A NEW USER
     } else {
@@ -51,15 +50,16 @@ router.post("/signup", async (req, res) => {
         account: {
           username: req.fields.username,
           // picture: req.files.picture,
+          picture: picture,
         },
         token: newToken,
         hash: newHash,
         salt: newSalt,
       });
-      console.log("user created");
+      // console.log("user created");
       // SAVE USER
       await newUser.save();
-      console.log("user saved");
+      // console.log("user saved");
 
       //   RESPONSE WITH INFO BELOW
       res.status(200).json({
@@ -69,11 +69,9 @@ router.post("/signup", async (req, res) => {
       });
     }
   } catch (error) {
-    console.log("erreur dans catch");
-    console.log(error.response); //undefined
-    res.status(400).json({
-      message: error.message,
-    });
+    // console.log("erreur dans catch");
+    // console.log(error.response);
+    console.log(error.message);
   }
 });
 

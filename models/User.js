@@ -12,7 +12,7 @@ const User = mongoose.model("User", {
       type: String,
     },
 
-    picture: [String],
+    picture: { type: mongoose.Schema.Types.Mixed, default: {} },
   },
 
   token: String,
