@@ -18,10 +18,13 @@ app.use(gameList);
 const gameDetails = require("./routes/gameDetails");
 app.use(gameDetails);
 
-//IMPORT ROUTES FOR CREATION OF USER
-
+//IMPORT ROUTES FOR SIGN UP
 const signupRoutes = require("./routes/signup");
 app.use(signupRoutes);
+
+//IMPORT ROUTES FOR LOGIN
+const loginRoutes = require("./routes/login");
+app.use(loginRoutes);
 
 app.all("*", (req, res) => {
   res.json("all routes");

@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
   const page = req.query.page;
   const genres = req.query.genres.toLowerCase();
   const platforms = req.query.platforms;
-  let queryforAxios = `https://api.rawg.io/api/games?key=${process.env.API_KEY}&page=${page}`;
+  let queryforAxios = `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&page=${page}`;
 
   // CONDITION FOR DIFFERENT FILTERS
 

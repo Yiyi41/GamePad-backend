@@ -11,8 +11,8 @@ const User = mongoose.model("User", {
       required: true,
       type: String,
     },
-    age: { type: Number, min: 18 },
-    avatar: [String],
+
+    picture: [String],
   },
 
   token: String,

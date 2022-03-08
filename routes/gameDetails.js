@@ -9,7 +9,7 @@ router.get("/gamedetails/:id", async (req, res) => {
   //   console.log(gameId);
   try {
     const response = await axios.get(
-      `https://api.rawg.io/api/games/${gameId}?key=${process.env.API_KEY}`
+      `https://api.rawg.io/api/games/${gameId}?key=${process.env.RAWG_API_KEY}`
     );
 
     res.json(response.data);
