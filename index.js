@@ -26,6 +26,10 @@ app.use(signupRoutes);
 const loginRoutes = require("./routes/login");
 app.use(loginRoutes);
 
+// IMPORT ROUTE FOR CHECK IF THE GAME IN FAVORITE
+const isFavroriteRoutes = require("./routes/isFavorite");
+app.use(isFavroriteRoutes);
+
 //IMPORT ROUTE FOR ADD FAVORIT
 const addfavoriteRoutes = require("./routes/addFavorite");
 app.use(addfavoriteRoutes);
