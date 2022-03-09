@@ -20,7 +20,6 @@ router.get("/", async (req, res) => {
     queryforAxios += `&platforms=${platforms}`;
   }
 
-  console.log(queryforAxios);
   try {
     // console.log("queryforAxios: " + queryforAxios);
     const response = await axios.get(queryforAxios);
