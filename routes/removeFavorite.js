@@ -8,14 +8,28 @@ router.post("/removefavorite", async (req, res) => {
   try {
     const myUser = await User.findById(req.fields.userId);
     console.log(myUser);
-    Favorite.findOneAndDelete({ gameId: req.fields.gameId, user: myUser }).exec(
-      (err, doc) => {
-        if (err) return res.status(400).json({ success: false, err });
-        res.status(200).json({ success: true, doc });
-      }
-    );
-    console.log(err);
-    console.log(doc);
+
+    const isInFavoriteReponse = await Favorite.find({
+      gameId: req.fields.gameId,
+      user: myUser,
+    });
+    console.log(isInFavoriteReponse);
+    let isFavorite = false;
+    if (isInFavoriteReponse.length !== 0) {
+      isFavorite = true;
+    }
+    console.log(isFavorite);
+
+    if (isFavorite === true) {
+      Favorite.findOneAndDelete({
+        gameId: req.fields.gameId,
+        user: myUser,
+      });
+
+      res.status(200).json("deleted");
+    } else {
+      console.log("not in the collection");
+    }
   } catch (error) {
     console.log(error.message);
   }
