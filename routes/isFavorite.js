@@ -8,7 +8,7 @@ router.post("/isfavorite", async (req, res) => {
   try {
     // CHECK IF THE GAME ALREADY IN USER'S COLLECTION
     const myUser = await User.findById(req.fields.userId);
-    console.log(myUser);
+    // console.log(myUser);
     const isInFavoriteReponse = await Favorite.find({
       gameId: req.fields.gameId,
       user: myUser,

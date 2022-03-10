@@ -4,7 +4,6 @@ const router = express.Router();
 const isAuthenticated = require("../middleware/isAuthenticated");
 
 const Favorite = require("../models/Favorite");
-const User = require("../models/User");
 
 router.post("/addfavorite", isAuthenticated, async (req, res) => {
   // console.log(req);
