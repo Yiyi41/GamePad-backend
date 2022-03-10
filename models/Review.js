@@ -8,6 +8,7 @@ const Review = mongoose.model("Review", {
     type: String,
   },
   gameId: { type: String },
+  gameTitle: { type: String },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

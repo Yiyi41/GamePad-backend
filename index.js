@@ -42,10 +42,13 @@ app.use(removefavoriteRoutes);
 const mycollectionRoutes = require("./routes/myCollection");
 app.use(mycollectionRoutes);
 
-// // IMPORT ROUTE FOR REVIEW
+// IMPORT ROUTE FOR REVIEW
 const reviewRoutes = require("./routes/review");
 app.use(reviewRoutes);
 
+// IMPORT ROUTE FOR REVIEW LIST
+const reviewlisteRoutes = require("./routes/reviewList");
+app.use(reviewlisteRoutes);
 // ALL ROUTE
 app.all("*", (req, res) => {
   res.json("all routes");

@@ -9,6 +9,7 @@ router.post("/review", isAuthenticated, async (req, res) => {
     const newReview = new Review({
       title: req.fields.title,
       gameId: req.fields.gameId,
+      gameTitle: req.fields.gameTitle,
       content: req.fields.content,
       user: req.userAuth._id,
     });
