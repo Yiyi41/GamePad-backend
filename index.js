@@ -38,6 +38,11 @@ app.use(addfavoriteRoutes);
 const removefavoriteRoutes = require("./routes/removeFavorite");
 app.use(removefavoriteRoutes);
 
+// IMPORT ROUTEB FOR MY COLLECTION LIST
+const mycollectionRoutes = require("./routes/myCollection");
+app.use(mycollectionRoutes);
+
+// ALL ROUTE
 app.all("*", (req, res) => {
   res.json("all routes");
 });

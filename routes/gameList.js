@@ -21,10 +21,7 @@ router.get("/", async (req, res) => {
   }
 
   try {
-    // console.log("queryforAxios: " + queryforAxios);
     const response = await axios.get(queryforAxios);
-    //   `https://api.rawg.io/api/games?key=${process.env.API_KEY}&page=${page}&search=${name}`
-    // );
 
     res.json(response.data);
   } catch (error) {

@@ -7,21 +7,21 @@ const User = require("../models/User");
 router.post("/removefavorite", async (req, res) => {
   try {
     const myUser = await User.findById(req.fields.userId);
-    console.log(myUser);
+    // console.log(myUser);
 
     const isInFavoriteReponse = await Favorite.find({
       gameId: req.fields.gameId,
       user: myUser,
     });
-    console.log(isInFavoriteReponse);
+    // console.log(isInFavoriteReponse);
     let isFavorite = false;
     if (isInFavoriteReponse.length !== 0) {
       isFavorite = true;
     }
-    console.log(isFavorite);
+    // console.log(isFavorite);
 
     if (isFavorite === true) {
-      Favorite.findOneAndDelete({
+      await Favorite.deleteOne({
         gameId: req.fields.gameId,
         user: myUser,
       });

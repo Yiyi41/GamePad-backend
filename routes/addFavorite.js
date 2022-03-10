@@ -1,19 +1,20 @@
 const express = require("express");
 const router = express.Router();
 
+const isAuthenticated = require("../middleware/isAuthenticated");
+
 const Favorite = require("../models/Favorite");
 const User = require("../models/User");
 
-router.post("/addfavorite", async (req, res) => {
-  //   console.log(req.fields);
+router.post("/addfavorite", isAuthenticated, async (req, res) => {
+  // console.log(req);
 
   try {
     // CHECK IF THE GAME ALREADY IN USER'S COLLECTION
-    const myUser = await User.findById(req.fields.userId);
-    // console.log(myUser);
+
     const isInFavoriteReponse = await Favorite.find({
       gameId: req.fields.gameId,
-      user: myUser,
+      user: req.userAuth._id,
     });
     // console.log(isInFavoriteReponse);
     let isFavorite = false;
@@ -29,9 +30,9 @@ router.post("/addfavorite", async (req, res) => {
         gameTitle: req.fields.gameTitle,
         gameId: req.fields.gameId,
         gameImage: req.fields.gameImage,
-        user: req.fields.userId,
+        user: req.userAuth._id,
       });
-      console.log(newFavorite);
+      // console.log(newFavorite);
       await newFavorite.save();
 
       res.status(200).json(newFavorite);
