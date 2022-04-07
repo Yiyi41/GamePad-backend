@@ -13,13 +13,14 @@ router.post("/review", isAuthenticated, async (req, res) => {
       content: req.fields.content,
       user: req.userAuth._id,
     });
-    // console.log(req.userAuth._id);
-    // console.log(newReview);
+
+    console.log(newReview);
 
     await newReview.save();
     res.status(200).json(newReview);
   } catch (error) {
     console.log(error.message);
+    res.status(400).json(error);
   }
 });
 
